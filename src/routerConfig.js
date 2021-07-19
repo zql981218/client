@@ -128,6 +128,9 @@ import GCMobileMLotShipOrderProperties from './pages/Properties/components/gc/wa
 import GCRwMaterialCancelSpareProperties from './pages/Properties/components/GCRwMaterialCancelSpareProperties';
 import WltLotPackCaseCheckProperties from './pages/Properties/components/WLTLotPackCaseCheckProperties';
 import GCMobileFinishLotStockInProperties from './pages/Properties/components/gc/wafer-issue/GCMobileFinishLotStockInProperties';
+import GCMobileRawMaterialCheckProperties from './pages/Properties/components/gc/wafer-issue/GCMobileRawMaterialCheckProperties';
+import GCMobileRawMaterialReceiveProperties from './pages/Properties/components/gc/wafer-issue/GCMobileRawMaterialReceiveProperties';
+import GCRWAttributeChangeProperties from './pages/Properties/components/GCRWAttributeChangeProperties';
 
 /**
  * 构建url ?表示可选参数
@@ -492,6 +495,12 @@ const routerConfig = [
     path: buildPath('GC/GCRwStockOutTagUpdateManager'),
     layout: HeaderAsideFooterResponsiveLayout,
     component: GCRwStockOutTaggingUpdateProperties,
+  },
+  //RW属性转换
+  {
+    path: buildPath('GC/GCRWAttributeChange'),
+    layout: HeaderAsideFooterResponsiveLayout,
+    component: GCRWAttributeChangeProperties,
   },
   //RW出货
   {
@@ -970,6 +979,16 @@ const routerConfig = [
     component: GCMobileMLotCheckProperties,
   },
   {
+    path: buildPath('Mobile/MobileWaferCheck'),
+    layout: BlankLayout,
+    component: GCMobileMLotCheckProperties,
+  },
+  {
+    path: buildPath('Mobile/MobileRawMaterialCheck'),
+    layout: BlankLayout,
+    component: GCMobileRawMaterialCheckProperties,
+  },
+  {
     path: buildPath('Mobile/MaterialLotQuery'),
     layout: BlankLayout,
     component: MobileProperties,
@@ -990,11 +1009,15 @@ const routerConfig = [
     component: GCMobileMLotShipOrderProperties,
   },
   {
-    path: buildPath('Mobile/MaterialLotShip'),
+    path: buildPath('Mobile/WltCpFinishLotStockIn'),
     layout: BlankLayout,
     component: GCMobileFinishLotStockInProperties,
   },
-
+  {
+    path: buildPath('Mobile/RawMaterialReceive'),
+    layout: BlankLayout,
+    component: GCMobileRawMaterialReceiveProperties,
+  },
   {
     path: '*',
     layout: HeaderAsideFooterResponsiveLayout,
