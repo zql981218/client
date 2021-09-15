@@ -24,6 +24,7 @@ const i18NCode = {
     ErrorNumberMoreThanZero: "ErrorNumberMoreThanZero",
     MaterialLotIdRepeat: "MaterialLotIdRepeat",
     SelectAtLeastTwoRow: "SelectAtLeastTwoRow",
+    ConfirmSpare: "ConfirmSpare",
 
     ConfirmDelete: "ConfirmDelete",
     ConfirmCancel: "ConfirmCancel",
@@ -75,7 +76,11 @@ const i18NCode = {
     BtnSpareMaterial: "SpareMaterial",
     BtnSpareMaterialConfirm: "SpareMaterialConfirm",
     BtnScrapShip: "ScrapShip",
+    BtnOtherShip: "OtherShip",
+    BtnOtherStockOut: "OtherStockOut",
     BtnCancelSpareMaterial:"CancelSpareMaterial",
+    BtnImportSearch: "ImportSearch",
+    BtnUnpackMLot: "UnpackMLot",
 
     ExpressNumber: "ExpressNumber",
     BtnRecordExpress: "RecordExpress",
@@ -103,11 +108,13 @@ const i18NCode = {
     TotalNumber : "TotalNumber",
     DataAlreadyExists: "DataAlreadyExists",
     NoDeliveryOrder: "NoDeliveryOrder",
+    DocumentHasBeenBoundToTheExpress: "DocumentHasBeenBoundToTheExpress",
     StorageCannotEmpty: "StorageCannotEmpty",
     BtnDeleteAll: "DeleteAll",
     BtnWeigh: "Weigh",
     CaseWeightNotScanned: "CaseWeightNotScanned",
     AddOneRowPlease: "AddOneRowPlease",
+    InconsistentScanningInformation: "InconsistentScanningInformation",
     ThereScanFieldCanOnlyBeOne: "ThereScanFieldCanOnlyBeOne",
     AllBoxWeightMustBeEmpty: "AllBoxWeightMustBeEmpty",
     SearchFieldCannotEmpty: "SearchFieldCannotEmpty",
@@ -211,6 +218,7 @@ const i18NCode = {
     IRABoxPrintLable: "IRABoxPrintLable",
     RawMaterialInventory: "RawMaterialInventory",
     EnterRawMaterialSpareQtyPlease: "EnterRawMaterialSpareQtyPlease",
+    TableDataMustBeEmpty: "TableDataMustBeEmpty",
 }
 
 const i18Messages = {
@@ -634,6 +642,11 @@ const i18Messages = {
         English: "No delivery order",
         Res: ""
     },
+    DocumentHasBeenBoundToTheExpress: {
+        Chinese: "单据已经绑定快递单号",
+        English: "Document has been bound to the express",
+        Res: ""
+    },
     StorageCannotEmpty: {
         Chinese: "库位号不能为空",
         English: "Storage Cannot Empty",
@@ -662,6 +675,11 @@ const i18Messages = {
     AddOneRowPlease: {
         Chinese: "请先扫描箱号",
         English: "Add one row please",
+        Res: ""
+    },
+    InconsistentScanningInformation: {
+        Chinese: "扫描信息不一致",
+        English: "Inconsistent scanning information",
         Res: ""
     },
     AllBoxWeightMustBeEmpty: {
@@ -1239,6 +1257,16 @@ const i18Messages = {
         English: "Scrap Ship",
         Res: ""     
     },
+    OtherShip: {
+        Chinese: "其它出库",
+        English: "Other Ship",
+        Res: ""     
+    },
+    OtherStockOut: {
+        Chinese: "材料/其他出",
+        English: "Other Stock Out",
+        Res: "材料/其他出"     
+    },
     IRABoxPrintLable: {
         Chinese: "IRA箱号打印",
         English: "IRABox Print",
@@ -1252,6 +1280,26 @@ const i18Messages = {
     EnterRawMaterialSpareQtyPlease: {
         Chinese: "请输入原材料备料颗数",
         English: "Enter Raw Material Spare Qty",
+        Res: ""
+    },
+    ImportSearch: {
+        Chinese: "导入查询",
+        English: "ImportSearch",
+        Res: ""
+    },
+    UnpackMLot: {
+        Chinese: "拆箱",
+        English: "UnpackMLot",
+        Res: ""
+    },
+    TableDataMustBeEmpty: {
+        Chinese: "数据必须为空！",
+        English: "TableData Must Be Empty",
+        Res: ""
+    },
+    ConfirmSpare: {
+        Chinese: "确认备料！",
+        English: "Confirm Spare",
         Res: ""
     }
 }

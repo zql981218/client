@@ -143,6 +143,10 @@ import GcMobileRMAMaterialReceiveProperties from './pages/Properties/components/
 import GCRawMaterialSpareOutDocProperties from './pages/Properties/components/GCRawMaterialSpareOutDocProperties';
 import GcMobileWltOrCpWaferReceiveProperties from './pages/Properties/components/gc/wafer-issue/GcMobileWltOrCpWaferReceiveProperties';
 import GcMobileMaterialLotWeighProperties from './pages/Properties/components/gc/wafer-issue/GcMobileMaterialLotWeighProperties';
+import GcMobileMaterialLotReTestOrderProperties from './pages/Properties/components/gc/wafer-issue/GcMobileMaterialLotReTestOrderProperties';
+import GcMobileWltOrCpStockOutProperties from './pages/Properties/components/gc/wafer-issue/GcMobileWltOrCpStockOutProperties';
+import GCMobileMLotIssueByOrderProperties from './pages/Properties/components/gc/wafer-issue/GCMobileMLotIssueByOrderProperties';
+import GcMobileOldRecordExpressNumberProperties from './pages/Properties/components/gc/wafer-issue/GcMobileOldRecordExpressNumberProperties';
 
 /**
  * 构建url ?表示可选参数
@@ -1036,7 +1040,7 @@ const routerConfig = [
   {
     path: buildPath('Mobile/MaterialLotIssue'),
     layout: BlankLayout,
-    component: GCMobileMLotIssueOrderProperties,
+    component: GCMobileMLotIssueByOrderProperties,
   },
   {
     path: buildPath('Mobile/MaterialLotShip'),
@@ -1093,6 +1097,21 @@ const routerConfig = [
     path: buildPath('Mobile/MaterialLotWeigh'),
     layout: BlankLayout,
     component: GcMobileMaterialLotWeighProperties,
+  },
+  {
+    path: buildPath('Mobile/MaterialLotReTestOrder'),
+    layout: BlankLayout,
+    component: GcMobileMaterialLotReTestOrderProperties,
+  },
+  {
+    path: buildPath('Mobile/WltOrCpStockOut'),
+    layout: BlankLayout,
+    component: GcMobileWltOrCpStockOutProperties,
+  },
+  {
+    path: buildPath('Mobile/OldRecordExpressNumber'),
+    layout: BlankLayout,
+    component: GcMobileOldRecordExpressNumberProperties,
   },
   {
     path: '*',
