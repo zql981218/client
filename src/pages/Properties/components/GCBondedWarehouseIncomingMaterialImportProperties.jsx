@@ -1,13 +1,13 @@
-import EntityProperties from "./entityProperties/EntityProperties";
-import GCIncomingMLotDeleteTable from "../../../components/Table/gc/GCIncomingMLotDeleteTable";
+import EntityScanProperties from "./entityProperties/EntityScanProperties";
+import GCBondedWarehouseIncomingMaterialImportTable from "../../../components/Table/gc/GCBondedWarehouseIncomingMaterialImportTable";
 
-export default class GCIncomingMLotDeleteProperties  extends EntityProperties {
+export default class GCBondedWarehouseIncomingMaterialImportProperties  extends EntityScanProperties {
 
-    static displayName = 'GCIncomingMLotDeleteProperties';
+    static displayName = 'GCBondedWarehouseIncomingMaterialImportProperties';
 
     constructor(props) {
         super(props);
-        this.state = {...this.state};
+        this.state = {...this.state, ...{showQueryFormButton: false}};
     }
 
     resetData = () => {
@@ -18,10 +18,10 @@ export default class GCIncomingMLotDeleteProperties  extends EntityProperties {
         });
     }
 
-
     buildTable = () => {
-        return <GCIncomingMLotDeleteTable
+        return <GCBondedWarehouseIncomingMaterialImportTable 
                                       pagination={true} 
+                                      propsFrom = {this.form}
                                       rowKey={this.state.rowKey} 
                                       ref={(showTable) => { this.showTable = showTable }} 
                                       table={this.state.table} 

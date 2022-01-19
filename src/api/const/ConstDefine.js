@@ -97,6 +97,7 @@ const UrlConstant = {
     GCIncomingImportUrl: ModuleUrlConstant.GC + "IncomingImport",
     GCIncomingMaterialSave: ModuleUrlConstant.GC + "IncomingMaterialSave",
     GCIncomingMaterialDelete: ModuleUrlConstant.GC + "IncomingMaterialDelete",
+    GCIncomingMaterialValidate: ModuleUrlConstant.GC + "IncomingImportValidate",
     GCProductSubcodeManagerUrl: ModuleUrlConstant.GC + "productSubcodeSet",
     GCUpdateMaterialLotManagerUrl: ModuleUrlConstant.GC + "updateMaterialLot",
     GCMLotImportSearchManagerUrl: ModuleUrlConstant.GC + "mLotImportSearch",
@@ -117,6 +118,7 @@ const UrlConstant = {
     GCRwMaterialLotManageUrl: ModuleUrlConstant.GC + "rwMaterialLotManager",
     GCRwMaterialManageUrl: ModuleUrlConstant.GC + "rwMaterialManager",
     GCRawMlotPrintManageUrl: ModuleUrlConstant.GC + "rawMlotPrintManager",
+    GCHNWarehouseImportSaveUrl: ModuleUrlConstant.GC + "HNWarehouseImportSave",
 };
 
 const SystemRefListName = {
