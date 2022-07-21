@@ -28,7 +28,8 @@ const ImportType = {
     GCWLTPackageReturn: "GCWLTPackageReturn",//WLT封装回货（-3）
     GCLcdCogDetial: "GCLcdCogDetial",//LCD(COG成品-明细)
     GCSensorPackageReturn: "GCSensorPackageReturn",//sensor封装回货（-3未测）
-    GCRMAGoodProductImport: "GCRMAGoodProductImport",//RMA良品_-3.5导入
+    GCRMAGoodProductImport: "GCRMAGoodProductImport",//Sensor RMA良品_-3.5导入
+    GCWltRMAGoodProductImport: "GCWltRMAGoodProductImport",//Wlt RMA良品_-3.5导入
     GCRMACustomerReturnFinishProduct: "GCRMACustomerReturnFinishProduct",//RMA_客户退货_成品
     GCRMAPureFinishProduct: "GCRMAPureFinishProduct",//RMA纯_成品-4
     GCSamsungPackingList: "GCSamsungPackingList",//三星packing list(-2CP未测)
@@ -51,9 +52,9 @@ const CpType = [ImportType.GCFabSensor2Unmeasured, ImportType.GCLCDCPUnmeasured2
                 ImportType.GCSensorPackageReturn, ImportType.GCSOCWaferUnmeasured, ImportType.GCSensorCPMeasuredHuaLing,
                 ImportType.GCSensorCPMeasuredKLT, ImportType.GCSensorUnmeasured, ImportType.GCSensorPackageReturnCogo,
                 ImportType.GCSensorTplccSenBang];
-const RMAType = [ImportType.GCRMAGoodProductImport, ImportType.GCRMACustomerReturnFinishProduct, ImportType.GCRMAPureFinishProduct];
+const RMAType = [ImportType.GCRMAGoodProductImport, ImportType.GCWltRMAGoodProductImport,ImportType.GCRMACustomerReturnFinishProduct, ImportType.GCRMAPureFinishProduct];
 
-const resetLocationType = [ImportType.GCWLAUnmeasured, ImportType.GCRMAGoodProductImport, ImportType.GCRMACustomerReturnFinishProduct, 
+const resetLocationType = [ImportType.GCWLAUnmeasured, ImportType.GCRMAGoodProductImport, ImportType.GCWltRMAGoodProductImport, ImportType.GCRMACustomerReturnFinishProduct, 
                            ImportType.GCRMAPureFinishProduct, ImportType.GCCOBFinishProduct, ImportType.GCLCDCOGFinishProductEcretive,
                            ImportType.GCSOCFinishProduct, ImportType.GCCOBRawMaterialProduct, ImportType.GCMaskFinishProduct];
 
@@ -170,6 +171,8 @@ export default class GCIncomingMaterialImportTable extends EntityListTable {
         }
         if(importType == "COM原料导入"){
             importType = "GCCOBRawMaterialProduct";
+        } else if(importType == "COB（-4成品）"){
+            importType = "GCCOBFinishProduct";
         }
         if(tableData.length > 0){
             Notification.showNotice(I18NUtils.getClientMessage(i18NCode.DataNotImportedPleaseCleanAllBeforeSelectNewFile));
@@ -283,7 +286,6 @@ export default class GCIncomingMaterialImportTable extends EntityListTable {
             let requestObject = {
                 dataList: data,
                 success: function(responseBody) {
-                    debugger;
                     let importFlag = responseBody.importFlag;
                     if(importFlag) {
                         Modal.confirm({
@@ -320,15 +322,22 @@ export default class GCIncomingMaterialImportTable extends EntityListTable {
             checkFourCodeFlag: checkFourCodeFlag,
             success: function(responseBody) {
                 let importCode = responseBody.importCode;
-                self.setState({
-                    data: [],
-                    loading: false
-                }); 
-                let message =  I18NUtils.getClientMessage(i18NCode.OperationSucceed);
-                if(importCode != null || importCode != undefined){
-                    message = message + `:${importCode}`;
+                if(importCode == "" || importCode == null || importCode == undefined){
+                    self.setState({
+                        loading: false
+                    }); 
+                    Notification.showError(I18NUtils.getClientMessage(i18NCode.ImportExceptionAndReImport));
+                } else {
+                    self.setState({
+                        data: [],
+                        loading: false
+                    }); 
+                    let message =  I18NUtils.getClientMessage(i18NCode.OperationSucceed);
+                    if(importCode != null || importCode != undefined){
+                        message = message + `:${importCode}`;
+                    }
+                    MessageUtils.showOperationSuccess(message);
                 }
-                MessageUtils.showOperationSuccess(message);
             }
         }
         IncomingImportRequest.sendImportRequest(requestObject);

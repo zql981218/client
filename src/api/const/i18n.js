@@ -40,6 +40,7 @@ const i18NCode = {
     BtnClose: "Close",
     BtnWatch: "Watch",
     BtnImp: "Imp",
+    BtnFtImp: "FtImp",
     BtnExp: "Exp",
     BtnCheck: "Check",
     BtnJudge: "Judge",
@@ -76,6 +77,9 @@ const i18NCode = {
     BtnAutoPick: "AutoPick",
     BtnSaleShip: "SaleShip",
     BtnAddShipOrder: "AddShipOrder",
+    BtnTagUpdate: "TagUpdate",
+    BtnCancelShipOrder: "CancelShipOrder",
+    BtnPreview: "Preview",
     BtnSpareMaterial: "SpareMaterial",
     BtnSpareMaterialConfirm: "SpareMaterialConfirm",
     BtnScrapShip: "ScrapShip",
@@ -95,6 +99,7 @@ const i18NCode = {
     BtnUnBind: "UnBind",
     BtnDelete: "Delete",
     BtnUpdate: "Update",
+    BtnMRB: "MRB",
     DataNotFound: "DataNotFound",
     Collapse: "Collapse",
     TransferItem: "Item",
@@ -144,6 +149,8 @@ const i18NCode = {
     Location: "Location",
     remarks: "remarks",
     HoldReason: "HoldReason",
+    HoldType: "HoldType",
+    PleaseChooseHoldType: "PleaseChooseHoldType",
     CancelReason: "CancelReason",
     ReleaseReason: "ReleaseReason",
     RemarksCannotEmpty: "RemarksCannotEmpty",
@@ -202,9 +209,11 @@ const i18NCode = {
     ExpressCompanyCannotEmpty: "ExpressCompanyCannotEmpty",
     BtnThreeSideShip: "ThreeSideShip",
     ChooseThreeSideShipOrderPlease: "ChooseThreeSideShipOrderPlease",
+    ChooseSideShipOrderPlease: "ChooseSideShipOrderPlease",
     ScrapReason: "ScrapReason",
     CheckSubCodeFlag: "CheckSubCodeFlag",
     BtnMergeDocLine: "MergeDocLine",
+    BtnUnMergeDocLine: "UnMergeDocLine",
     TheLocationAndWarehouseIsNotSame: "TheLocationAndWarehouseIsNotSame",
     BondProMustBeHK: "BondProMustBeHK",
     OrderTime: "OrderTime",
@@ -225,6 +234,14 @@ const i18NCode = {
     EnterRawMaterialSpareQtyPlease: "EnterRawMaterialSpareQtyPlease",
     TableDataMustBeEmpty: "TableDataMustBeEmpty",
     TheMaterialLotIsExistedInStroage: "TheMaterialLotIsExistedInStroage",
+    TheInputDataDoesNotMeetTheRequirements: "TheInputDataDoesNotMeetTheRequirements",
+    TrueQtyCannotBeEmpty: "TrueQtyCannotBeEmpty",
+    TrueQty: "TrueQty",
+    StockLocation: "StockLocation",
+    ImportExceptionAndReImport: "ImportExceptionAndReImport",
+    PleaseChooseCancelReason: "PleaseChooseCancelReason",
+    TraferWarehouseId: "TraferWarehouseId",
+    CustomerType : "CustomerType",
 }
 
 const i18Messages = {
@@ -394,7 +411,7 @@ const i18Messages = {
         Res: ""
     },
     Add: {
-        Chinese: "添加",
+        Chinese: "查询",
         English: "Add",
         Res: ""
     },
@@ -823,6 +840,11 @@ const i18Messages = {
         English: "Choose ReleaseReason Please!",
         Res: ""
     },
+    PleaseChooseHoldType: {
+        Chinese: "请选择扣留类型!",
+        English: "Choose HoldType Please!",
+        Res: ""
+    },
     Location: {
         Chinese: "保税属性",
         English: "Location",
@@ -846,6 +868,11 @@ const i18Messages = {
     ReleaseReason: {
         Chinese: "释放原因",
         English: "ReleaseReason",
+        Res: ""
+    },
+    HoldType: {
+        Chinese: "HOLD分类",
+        English: "HoldType",
         Res: ""
     },
     RemarksCannotEmpty: {
@@ -1148,6 +1175,11 @@ const i18Messages = {
         English: "Choose ThreeSide ShipOrder Please!",
         Res: "" 
     },
+    ChooseSideShipOrderPlease: {
+        Chinese: "请选择销售单!",
+        English: "Choose ShipOrder Please!",
+        Res: "" 
+    },
     ScrapReason: {
         Chinese: "报废原因",
         English: "Scrap Reason",
@@ -1161,6 +1193,11 @@ const i18Messages = {
     MergeDocLine: {
         Chinese: "合单",
         English: "Merge DocLine",
+        Res: "" 
+    },
+    UnMergeDocLine: {
+        Chinese: "取消合单",
+        English: "UnMergeOrder",
         Res: "" 
     },
     SelectAtLeastTwoRow: {
@@ -1235,8 +1272,18 @@ const i18Messages = {
     },
     AddShipOrder: {
         Chinese: "添加发货单",
-        English: "SaleShip",
+        English: "AddSaleShip",
         Res: ""     
+    },
+    CancelShipOrder: {
+        Chinese: "取消发货单",
+        English: "CancelSaleShip",
+        Res: ""     
+    },
+    Preview: {
+        Chinese: "预览",
+        English: "Preview",
+        Res: ""   
     },
     ShipOrderId: {
         Chinese: "发货单号",
@@ -1336,6 +1383,56 @@ const i18Messages = {
     TheMaterialLotIsExistedInStroage: {
         Chinese: "清单中已经存在在库的物料批次！",
         English: "The MaterialLot is Existed in Stroage",
+        Res: ""
+    },
+    FtImp: {
+        Chinese: "FT导入",
+        English: "FT Import",
+        Res: ""
+    },
+    TheInputDataDoesNotMeetTheRequirements: {
+        Chinese: "输入数据不符合要求！",
+        English: "The input data does not meet the requirements",
+        Res: ""
+    },
+    TrueQtyCannotBeEmpty: {
+        Chinese: "实际数量不能为空！",
+        English: "True Qty cannot be empty",
+        Res: ""
+    },
+    TrueQty: {
+        Chinese: "实际数量",
+        English: "True Qty",
+        Res: ""
+    },
+    StockLocation: {
+        Chinese: "货架归属地",
+        English: "StockLocation",
+        Res: ""
+    },
+    ImportExceptionAndReImport: {
+        Chinese: "导入异常，请重新导入！",
+        English: "Import Exception And ReImport",
+        Res: ""
+    },
+    PleaseChooseCancelReason: {
+        Chinese: "请选择取消原因！",
+        English: "Please Choose Cancel Reason!",
+        Res: ""
+    },
+    TraferWarehouseId: {
+        Chinese: "转入仓库",
+        English: "TraferWarehouseId",
+        Res: ""
+    },
+    TagUpdate: {
+        Chinese: "标注修改",
+        English: "TagUpdate",
+        Res: ""
+    },
+    CustomerType: {
+        Chinese: "账套类型",
+        English: "CustomerType",
         Res: ""
     }
 }

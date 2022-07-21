@@ -53,6 +53,42 @@ export default class RwMLotManagerRequest {
         MessageUtils.sendRequest(requestObject);
     }
 
+    static sendCOBWaferStockTagQueryRequest = (object) => {
+        let {tableRrn, whereClause} = object;
+        let requestBody = RwMLotManagerRequestBody.buildQueryCobWaferMLotUnit(tableRrn, whereClause);
+        let requestHeader = new RwMLotManagerRequestHeader();
+        let request = new Request(requestHeader, requestBody, UrlConstant.GCRwMaterialLotManageUrl);
+        let requestObject = {
+            request: request,
+            success: object.success
+        }
+        MessageUtils.sendRequest(requestObject);
+    }
+
+    static sendAutoPickTagMLotUnitRequest = (object) => {
+        let {materialLotUnitList, pickQty} = object;
+        let requestBody = RwMLotManagerRequestBody.buildAutoPickTagMLotUnit(materialLotUnitList, pickQty);
+        let requestHeader = new RwMLotManagerRequestHeader();
+        let request = new Request(requestHeader, requestBody, UrlConstant.GCRwMaterialLotManageUrl);
+        let requestObject = {
+            request: request,
+            success: object.success
+        }
+        MessageUtils.sendRequest(requestObject);
+    }
+
+    static sendCOBStockOutTagRequest = (object) => {
+        let {materialLotUnitList, abbreviation, customerName, remarks} = object;
+        let requestBody = RwMLotManagerRequestBody.buildCOBMLotUnitStockTagging(materialLotUnitList, abbreviation, customerName, remarks);
+        let requestHeader = new RwMLotManagerRequestHeader();
+        let request = new Request(requestHeader, requestBody, UrlConstant.GCRwMaterialLotManageUrl);
+        let requestObject = {
+            request: request,
+            success: object.success
+        }
+        MessageUtils.sendRequest(requestObject);
+    }
+
     static sendRwStockOutTagRequest = (object) => {
         let {materialLotList, abbreviation, customerName, remarks} = object;
         let requestBody = RwMLotManagerRequestBody.buildRwMLotStockTagging(materialLotList, abbreviation, customerName, remarks);
@@ -80,6 +116,30 @@ export default class RwMLotManagerRequest {
     static sendAddShipOrderIdRequest = (object) => {
         let {materialLotList, shipOrderId} = object;
         let requestBody = RwMLotManagerRequestBody.buildMLotAddShipOrderId(materialLotList, shipOrderId);
+        let requestHeader = new RwMLotManagerRequestHeader();
+        let request = new Request(requestHeader, requestBody, UrlConstant.GCRwMaterialLotManageUrl);
+        let requestObject = {
+            request: request,
+            success: object.success
+        }
+        MessageUtils.sendRequest(requestObject);
+    }
+
+    static sendCancelShipOrderIdRequest = (object) => {
+        let {materialLotList} = object;
+        let requestBody = RwMLotManagerRequestBody.buildMLotCancelShipOrderId(materialLotList);
+        let requestHeader = new RwMLotManagerRequestHeader();
+        let request = new Request(requestHeader, requestBody, UrlConstant.GCRwMaterialLotManageUrl);
+        let requestObject = {
+            request: request,
+            success: object.success
+        }
+        MessageUtils.sendRequest(requestObject);
+    }
+
+    static sendPreViewMLotRequest = (object) => {
+        let {materialLotList} = object;
+        let requestBody = RwMLotManagerRequestBody.buildMLotPreViewMLot(materialLotList);
         let requestHeader = new RwMLotManagerRequestHeader();
         let request = new Request(requestHeader, requestBody, UrlConstant.GCRwMaterialLotManageUrl);
         let requestObject = {
@@ -126,6 +186,41 @@ export default class RwMLotManagerRequest {
 
     static sendRWStockOutPrintRequest = (object) => {
         let requestBody = RwMLotManagerRequestBody.buildRWStockOutPrintParameter(object.materialLotRrn);
+        let requestHeader = new RwMLotManagerRequestHeader();
+        let request = new Request(requestHeader, requestBody, UrlConstant.GCRwMaterialLotManageUrl);
+        let requestObject = {
+            request: request,
+            success: object.success
+        }
+        MessageUtils.sendRequest(requestObject);
+    }
+
+    static sendRWBoxLabelPrintRequest = (object) => {
+        let requestBody = RwMLotManagerRequestBody.buildRWBoxLabelPrintParameter(object.materialLotRrn);
+        let requestHeader = new RwMLotManagerRequestHeader();
+        let request = new Request(requestHeader, requestBody, UrlConstant.GCRwMaterialLotManageUrl);
+        let requestObject = {
+            request: request,
+            success: object.success
+        }
+        MessageUtils.sendRequest(requestObject);
+    }
+
+    static sendCOBMLotAutoPackRequest = (object) => {
+        let {materialLotList} = object;
+        let requestBody = RwMLotManagerRequestBody.buildCOBMLotAutoPack(materialLotList);
+        let requestHeader = new RwMLotManagerRequestHeader();
+        let request = new Request(requestHeader, requestBody, UrlConstant.GCRwMaterialLotManageUrl);
+        let requestObject = {
+            request: request,
+            success: object.success
+        }
+        MessageUtils.sendRequest(requestObject);
+    }
+
+    static sendStockOutTagUpdateRequest = (object) => {
+        let {materialLotList, customerName, abbreviation, remarks} = object;
+        let requestBody = RwMLotManagerRequestBody.buildStockTagUpdate(materialLotList, customerName, abbreviation, remarks);
         let requestHeader = new RwMLotManagerRequestHeader();
         let request = new Request(requestHeader, requestBody, UrlConstant.GCRwMaterialLotManageUrl);
         let requestObject = {

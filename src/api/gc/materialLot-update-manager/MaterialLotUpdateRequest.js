@@ -6,6 +6,18 @@ import { UrlConstant } from "../../const/ConstDefine";
 
 export default class MaterialLotUpdateRequest {
     
+    static sendUpdateMRBCommentsRequest = (object) => {
+        debugger;
+        let requestBody = MaterialLotUpdateRequestBody.buildUpdateMRBCommentsInfo(object.materialLotList, object.mrbComments);
+        let requestHeader = new MaterialLotUpdateRequestHeader();
+        let request = new Request(requestHeader, requestBody, UrlConstant.GCUpdateMaterialLotManagerUrl);
+        let requestObject = {
+            request: request,
+            success: object.success
+        }
+        MessageUtils.sendRequest(requestObject);
+    }
+
     static sendUpdateRequest = (object) => {
         let requestBody = MaterialLotUpdateRequestBody.buildUpdateInfo(object.treasuryeNote, object.materialLotList);
         let requestHeader = new MaterialLotUpdateRequestHeader();
@@ -41,7 +53,7 @@ export default class MaterialLotUpdateRequest {
     }
 
     static sendHoldMaterialLotRequest = (object) => {
-        let requestBody = MaterialLotUpdateRequestBody.buildHoldInfo(object.materialLotList, object.reason, object.remarks);
+        let requestBody = MaterialLotUpdateRequestBody.buildHoldInfo(object.materialLotList, object.reason, object.remarks, object.holdType);
         let requestHeader = new MaterialLotUpdateRequestHeader();
         let request = new Request(requestHeader, requestBody, UrlConstant.GCUpdateMaterialLotManagerUrl);
         let requestObject = {
@@ -95,5 +107,71 @@ export default class MaterialLotUpdateRequest {
             success: object.success
         }
         MessageUtils.sendImportData(requestObject, file);
+    }
+
+    static sendImportSearchMLotUnitRequest = (object, file) => {
+        let requestBody = MaterialLotUpdateRequestBody.buildMLotUnitImportSearch(object.tableRrn);
+        let requestHeader = new MaterialLotUpdateRequestHeader();
+        let request = new Request(requestHeader, requestBody, UrlConstant.GCMLotImportSearchManagerUrl);
+        let requestObject = {
+            request: request,
+            success: object.success
+        }
+        MessageUtils.sendImportData(requestObject, file);
+    }
+
+    static sendRwImportSearchRequest = (object, file) => {
+        let requestBody = MaterialLotUpdateRequestBody.buildRwImportSearch(object.tableRrn);
+        let requestHeader = new MaterialLotUpdateRequestHeader();
+        let request = new Request(requestHeader, requestBody, UrlConstant.GCMLotImportSearchManagerUrl);
+        let requestObject = {
+            request: request,
+            success: object.success
+        }
+        MessageUtils.sendImportData(requestObject, file);
+    }
+
+    static sendSaveMLotShipHisRequest = (object) => {
+        let requestBody = MaterialLotUpdateRequestBody.buildSaveShipHisInfo(object.materialLotList);
+        let requestHeader = new MaterialLotUpdateRequestHeader();
+        let request = new Request(requestHeader, requestBody, UrlConstant.GCUpdateMaterialLotManagerUrl);
+        let requestObject = {
+            request: request,
+            success: object.success
+        }
+        MessageUtils.sendRequest(requestObject);
+    }
+
+    static sendExportRequest = (object) => {
+        let requestBody = MaterialLotUpdateRequestBody.buildExport(object.tableName, object.materialLotList);
+        let requestHeader = new MaterialLotUpdateRequestHeader();
+        let request = new Request(requestHeader, requestBody, UrlConstant.GCExcelExportManagerUrl);
+        let requestObject = {
+            request: request,
+            success: object.success
+        }
+        MessageUtils.sendExpRequest(requestObject, object.fileName);
+    }
+
+    static sendPreviewExportRequest = (object) => {
+        let requestBody = MaterialLotUpdateRequestBody.buildPreviewExport(object.tableName, object.materialLotList);
+        let requestHeader = new MaterialLotUpdateRequestHeader();
+        let request = new Request(requestHeader, requestBody, UrlConstant.GCExcelExportManagerUrl);
+        let requestObject = {
+            request: request,
+            success: object.success
+        }
+        MessageUtils.sendExpRequest(requestObject, object.fileName);
+    }
+
+    static sendCobUnitExportRequest = (object) => {
+        let requestBody = MaterialLotUpdateRequestBody.buildCobUnitExport(object.tableName, object.materialLotUnitList);
+        let requestHeader = new MaterialLotUpdateRequestHeader();
+        let request = new Request(requestHeader, requestBody, UrlConstant.GCExcelExportManagerUrl);
+        let requestObject = {
+            request: request,
+            success: object.success
+        }
+        MessageUtils.sendExpRequest(requestObject, object.fileName);
     }
 }

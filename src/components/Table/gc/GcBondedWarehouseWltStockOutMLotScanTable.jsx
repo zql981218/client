@@ -36,6 +36,7 @@ export default class GcBondedWarehouseWltStockOutMLotScanTable extends EntitySca
     createButtonGroup = () => {
         let buttons = [];
         buttons.push(this.createSaleShip());
+        // buttons.push(this.createThreeSideShip());
         return buttons;
     }
 
@@ -77,21 +78,21 @@ export default class GcBondedWarehouseWltStockOutMLotScanTable extends EntitySca
         }
     }
 
-    /**
-     * 销售出
-     */
-    saleShip = () => {
+     //三方销售
+     threeSideShip = () => {
         let self = this;
         if (this.getErrorCount() > 0) {
             Notification.showError(I18NUtils.getClientMessage(i18NCode.ErrorNumberMoreThanZero));
             return;
         }
-        let checkSubCode = this.state.value;
-
-        let orderTable = this.props.orderTable;
-        let orders = orderTable.state.data;
-        if (orders.length === 0) {
-            Notification.showNotice(I18NUtils.getClientMessage(i18NCode.SelectOneRow));
+        let documentLine = this.props.orderTable.getSingleSelectedRow();
+        if (!documentLine) {
+            self.setState({ 
+                loading: false
+            });
+            return;
+        } else if(documentLine.reserved31 != 'ERP_SOA'){
+            Notification.showError(I18NUtils.getClientMessage(i18NCode.ChooseThreeSideShipOrderPlease));
             return;
         }
 
@@ -107,7 +108,54 @@ export default class GcBondedWarehouseWltStockOutMLotScanTable extends EntitySca
         EventUtils.getEventEmitter().on(EventUtils.getEventNames().ButtonLoaded, () => self.setState({loading: false}));
 
         let requestObj = {
-            documentLines : orders,
+            documentLine : documentLine,
+            materialLots : materialLots,
+            success: function(responseBody) {
+                if (self.props.resetData) {
+                    self.props.onSearch();
+                    self.props.resetData();
+                }
+                MessageUtils.showOperationSuccess();
+            }
+        }
+        WltStockOutManagerRequest.sendWltThreeSideShipRequest(requestObj);
+    }
+
+     /**
+     * 销售出与三方销售合并
+     * @returns 
+     */
+      saleShip = () => {
+        let self = this;
+        if (this.getErrorCount() > 0) {
+            Notification.showError(I18NUtils.getClientMessage(i18NCode.ErrorNumberMoreThanZero));
+            return;
+        }
+        let checkSubCode = this.state.value;
+        let documentLine = this.props.orderTable.getSingleSelectedRow();
+        if (!documentLine) {
+            self.setState({ 
+                loading: false
+            });
+            return;
+        } else if(documentLine.reserved31 != 'ERP_SOA'){
+            Notification.showError(I18NUtils.getClientMessage(i18NCode.ChooseSideShipOrderPlease));
+            return;
+        }
+
+        let materialLots = this.state.data;
+        if (materialLots.length === 0 ) {
+            Notification.showNotice(I18NUtils.getClientMessage(i18NCode.AddAtLeastOneRow));
+            return;
+        }
+
+        self.setState({
+            loading: true
+        });
+        EventUtils.getEventEmitter().on(EventUtils.getEventNames().ButtonLoaded, () => self.setState({loading: false}));
+
+        let requestObj = {
+            documentLine : documentLine,
             materialLots : materialLots,
             checkSubCode: checkSubCode,
             success: function(responseBody) {
@@ -118,7 +166,7 @@ export default class GcBondedWarehouseWltStockOutMLotScanTable extends EntitySca
                 MessageUtils.showOperationSuccess();
             }
         }
-        WltStockOutManagerRequest.sendSaleStockOutRequest(requestObj);
+        WltStockOutManagerRequest.sendSaleAndthreeSideStockOutRequest(requestObj);
     }
 
     getErrorCount = () => {
@@ -169,6 +217,12 @@ export default class GcBondedWarehouseWltStockOutMLotScanTable extends EntitySca
     createSaleShip = () => {
         return <Button key="otherShip" type="primary" style={styles.tableButton} loading={this.state.loading} icon="inbox" onClick={this.saleShip}>
                        {I18NUtils.getClientMessage(i18NCode.BtnSaleShip)}
+                    </Button>
+    }
+
+    createThreeSideShip = () => {
+        return <Button key="threeSideShip" type="primary" style={styles.tableButton} loading={this.state.loading} icon="inbox" onClick={this.threeSideShip}>
+                       {I18NUtils.getClientMessage(i18NCode.BtnThreeSideShip)}
                     </Button>
     }
 }

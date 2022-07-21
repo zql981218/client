@@ -8,6 +8,7 @@ const ActionType = {
     ObliqueLabelPrint: "ObliqueLabelPrint",
     BatchCancelOrder: "BatchCancelOrder",
     QueryOrderInfo: "QueryOrderInfo",
+    SamsungOuterBoxLabelPrint: "SamsungOuterBoxLabelPrint",
 }
 
 export default class RecordExpressNumberRequestBody {
@@ -30,12 +31,13 @@ export default class RecordExpressNumberRequestBody {
         return body;
     }
 
-    static buildAutoRecordExpress(materialLots, serviceMode, payMode, orderTime) {
+    static buildAutoRecordExpress(materialLots, serviceMode, payMode, orderTime, customerType) {
         let body = new RecordExpressNumberRequestBody(ActionType.AutoOrder);
         body.materialLots = materialLots;
         body.serviceMode = serviceMode;
         body.payMode = payMode;
         body.orderTime = orderTime;
+        body.customerType = customerType;
         return body;
     }
 
@@ -62,6 +64,13 @@ export default class RecordExpressNumberRequestBody {
     static buildObliqueLabelPrint(materialLots) {
         let body = new RecordExpressNumberRequestBody(ActionType.ObliqueLabelPrint);
         body.materialLots = materialLots;
+        return body;
+    }
+    
+    static buildSamsungOuterBoxLabelPrint(documentLineList, printCount) {
+        let body = new RecordExpressNumberRequestBody(ActionType.SamsungOuterBoxLabelPrint);
+        body.documentLineList = documentLineList;
+        body.printCount = printCount;
         return body;
     }
     

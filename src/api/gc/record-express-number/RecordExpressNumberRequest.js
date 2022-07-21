@@ -19,7 +19,7 @@ export default class RecordExpressNumberRequest {
     }
 
     static sendAutoRecordExpress = (object) => {
-        let requestBody = RecordExpressNumberRequestBody.buildAutoRecordExpress(object.datas, object.serviceMode, object.payMode, object.orderTime);
+        let requestBody = RecordExpressNumberRequestBody.buildAutoRecordExpress(object.datas, object.serviceMode, object.payMode, object.orderTime, object.customerType);
         let requestHeader = new RecordExpressNumberRequestHeader();
         let request = new Request(requestHeader, requestBody, UrlConstant.GCRecordExpressUrl);
         let requestObject = {
@@ -64,6 +64,17 @@ export default class RecordExpressNumberRequest {
 
     static sendObliqueLabelPrintRequest = (object) => {
         let requestBody = RecordExpressNumberRequestBody.buildObliqueLabelPrint(object.datas);
+        let requestHeader = new RecordExpressNumberRequestHeader();
+        let request = new Request(requestHeader, requestBody, UrlConstant.GCRecordExpressUrl);
+        let requestObject = {
+            request: request,
+            success: object.success
+        }
+        MessageUtils.sendRequest(requestObject);
+    }
+
+    static sendSamsungOuterBoxLabelPrintRequest = (object) => {
+        let requestBody = RecordExpressNumberRequestBody.buildSamsungOuterBoxLabelPrint(object.documentLineList, object.printCount);
         let requestHeader = new RecordExpressNumberRequestHeader();
         let request = new Request(requestHeader, requestBody, UrlConstant.GCRecordExpressUrl);
         let requestObject = {

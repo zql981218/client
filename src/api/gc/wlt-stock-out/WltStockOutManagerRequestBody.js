@@ -13,8 +13,12 @@ const actionType = {
     SaleShip: "SaleShip",
     GCRWAttributeChange: "GCRWAttributeChange",
     WltOtherStockOut: "WltOtherStockOut",
+    WltOtherShipByOrder: "WltOtherShipByOrder",
+    HNSampleCollectionStockOut: "HNSampleCollectionStockOut",
+    HNWarehouseWltOtherStockOut: "HNWarehouseWltOtherStockOut",
     MobileWltStockOut: "MobileWltStockOut",
     MobileSaleShip: "MobileSaleShip",
+    SaleAndthreeSide: "SaleAndthreeSide",
 }
 
 export default class WltStockOutManagerRequestBody {
@@ -73,6 +77,42 @@ export default class WltStockOutManagerRequestBody {
         let body = new WltStockOutManagerRequestBody(actionType.WltOtherStockOut, documentLines, materialLotActions);
         return body;
     }
+
+    static buildWltShipByOrder(documentLine, materialLots) {
+        let materialLotActions = [];
+        materialLots.forEach(materialLot => {
+            let materialLotAction = new MaterialLotAction();
+            materialLotAction.setMaterialLotId(materialLot.materialLotId);
+            materialLotActions.push(materialLotAction)
+        });
+        let body = new WltStockOutManagerRequestBody(actionType.WltOtherShipByOrder);
+        body.documentLine = documentLine;
+        body.materialLotActions = materialLotActions;
+        return body;
+    }
+
+    static buildHNSampleCollectionStockOut(documentLines, materialLots) {
+        let materialLotActions = [];
+        materialLots.forEach(materialLot => {
+            let materialLotAction = new MaterialLotAction();
+            materialLotAction.setMaterialLotId(materialLot.materialLotId);
+            materialLotActions.push(materialLotAction)
+        });
+        let body = new WltStockOutManagerRequestBody(actionType.HNSampleCollectionStockOut, documentLines, materialLotActions);
+        return body;
+    }
+
+    static buildHNWarehouseWltOtherStockOut(documentLines, materialLots) {
+        let materialLotActions = [];
+        materialLots.forEach(materialLot => {
+            let materialLotAction = new MaterialLotAction();
+            materialLotAction.setMaterialLotId(materialLot.materialLotId);
+            materialLotActions.push(materialLotAction)
+        });
+        let body = new WltStockOutManagerRequestBody(actionType.HNWarehouseWltOtherStockOut, documentLines, materialLotActions);
+        return body;
+    }
+
 
     static buildThreeSideShip(documentLine, materialLots) {
         let body = new WltStockOutManagerRequestBody(actionType.ThreeSideShip);
@@ -168,6 +208,19 @@ export default class WltStockOutManagerRequestBody {
         });
         let body = new WltStockOutManagerRequestBody(actionType.SaleShip, documentLines, materialLotActions);
         body.checkSubCode = checkSubCode;
+        return body;
+    }
+
+    static buildSaleAndthreeSideStockOut(documentLine, materialLots, checkSubCode) {
+        let materialLotActions = [];
+        materialLots.forEach(materialLot => {
+            let materialLotAction = new MaterialLotAction();
+            materialLotAction.setMaterialLotId(materialLot.materialLotId);
+            materialLotActions.push(materialLotAction)
+        });
+        let body = new WltStockOutManagerRequestBody(actionType.SaleAndthreeSide, undefined, materialLotActions);
+        body.checkSubCode = checkSubCode;
+        body.documentLine = documentLine;
         return body;
     }
 

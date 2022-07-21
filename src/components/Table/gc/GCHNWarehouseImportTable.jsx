@@ -14,7 +14,7 @@ const TableName = {
 }
 
 const ImportType = {
-    HNWarehouseImport : "HNWarehouseImport",
+    HNWarehouseImport : "HNWarehouseImport", //成品导入
 }
 
 const resetLocationType = [ImportType.HNWarehouseImport];
@@ -116,7 +116,7 @@ export default class GCHNWarehouseImportTable extends EntityListTable {
             Notification.showInfo(I18NUtils.getClientMessage(i18NCode.ChooseImportTypePlease));
             return;
         }
-        if(importType == "湖南仓导入"){
+        if(importType == "成品导入"){
             importType = "HNWarehouseImport";
         }
         if(tableData.length > 0){
@@ -146,7 +146,6 @@ export default class GCHNWarehouseImportTable extends EntityListTable {
     }
 
     importData =() => {
-        debugger;
         const {data} = this.state;
         if(data.length == 0){
             Notification.showNotice(I18NUtils.getClientMessage(i18NCode.AddAtLeastOneRow));
@@ -168,29 +167,7 @@ export default class GCHNWarehouseImportTable extends EntityListTable {
         if(warehouseId == "HN_STOCK" || warehouseId == "湖南仓库"){
             warehouseId = 8152;
         } 
-        let flag = false;
-        data.forEach(d => {
-            if(!(d.reserved6 == "HN" &&  warehouseId == "8152")){
-                flag = true;
-            } 
-        })
-
-        if(flag){
-            Modal.confirm({
-                title: '操作提示',
-                content: I18NUtils.getClientMessage(i18NCode.BondProMustBeHK),
-                okText: '确认',
-                cancelText: '取消',
-                onOk:() => {
-                    
-                },
-                onCancel:() => {
-                    return;
-                }
-            });
-        } else {
-            this.doSave(warehouseId);
-        }
+        this.doSave(warehouseId);
     }
 
     doSave =(warehouseId) =>{
@@ -199,7 +176,7 @@ export default class GCHNWarehouseImportTable extends EntityListTable {
         let queryFields = this.props.propsFrom.state.queryFields;
         let importType = this.props.propsFrom.props.form.getFieldValue(queryFields[0].name);
 
-        if(importType == "湖南仓导入"){
+        if(importType == "成品导入"){
             importType = "HNWarehouseImport";
         }
 
@@ -219,7 +196,6 @@ export default class GCHNWarehouseImportTable extends EntityListTable {
     }
 
     sendImportSaveRequest =(data, importType) =>{
-        debugger;
         let self = this;
         let requestObject = {
             dataList: data,

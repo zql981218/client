@@ -3,12 +3,11 @@ import ReservedManagerRequestBody from './ReservedManagerRequestBody';
 import {UrlConstant} from '../../const/ConstDefine';
 import MessageUtils from '../../utils/MessageUtils';
 import Request from '../../Request';
-import { object } from 'prop-types';
 
 export default class ReservedManagerRequest {
 
     static sendGetMaterialLot = (object) => {
-        let requestBody = ReservedManagerRequestBody.buildGetMaterialLot(object.docLineRrn, object.tableRrn);
+        let requestBody = ReservedManagerRequestBody.buildGetMaterialLot(object.docLineRrn, object.tableRrn, object.stockLocation);
         let requestHeader = new ReservedManagerRequestHeader();
         let request = new Request(requestHeader, requestBody, UrlConstant.GCReservedUrl);
         let requestObject = {
@@ -17,6 +16,73 @@ export default class ReservedManagerRequest {
         }
         MessageUtils.sendRequest(requestObject);
     }
+
+    static sendGetOtherShipReservedMLot = (object) => {
+        let requestBody = ReservedManagerRequestBody.GetOtherShipReservedMLot(object.docLineRrn, object.tableRrn, object.stockLocation);
+        let requestHeader = new ReservedManagerRequestHeader();
+        let request = new Request(requestHeader, requestBody, UrlConstant.GCReservedUrl);
+        let requestObject = {
+            request: request,
+            success: object.success
+        }
+        MessageUtils.sendRequest(requestObject);
+    }
+
+    static sendHNWarehouseGetOtherShipReservedMLot = (object) => {
+        let requestBody = ReservedManagerRequestBody.buildHNWarehouseGetOtherShipReservedMLot(object.docLineRrn, object.tableRrn, object.stockLocation);
+        let requestHeader = new ReservedManagerRequestHeader();
+        let request = new Request(requestHeader, requestBody, UrlConstant.GCReservedUrl);
+        let requestObject = {
+            request: request,
+            success: object.success
+        }
+        MessageUtils.sendRequest(requestObject);
+    }
+
+    static sendBSWGetOtherShipReservedMLot = (object) => {
+        let requestBody = ReservedManagerRequestBody.buildBSWGetOtherShipReservedMLot(object.docLineRrn, object.tableRrn, object.stockLocation);
+        let requestHeader = new ReservedManagerRequestHeader();
+        let request = new Request(requestHeader, requestBody, UrlConstant.GCReservedUrl);
+        let requestObject = {
+            request: request,
+            success: object.success
+        }
+        MessageUtils.sendRequest(requestObject);
+    }
+
+    static sendOtherShipReserved= (object) => {
+        let requestBody = ReservedManagerRequestBody.buildOtherShipReserved(object.docLineRrn, object.materialLots, object.stockNote);
+        let requestHeader = new ReservedManagerRequestHeader();
+        let request = new Request(requestHeader, requestBody, UrlConstant.GCReservedUrl);
+        let requestObject = {
+            request: request,
+            success: object.success
+        }
+        MessageUtils.sendRequest(requestObject);
+    }
+
+    static sendHNwarehouseOtherShipReserved= (object) => {
+        let requestBody = ReservedManagerRequestBody.buildHNwarehouseOtherShipReserved(object.docLineRrn, object.materialLots, object.stockNote);
+        let requestHeader = new ReservedManagerRequestHeader();
+        let request = new Request(requestHeader, requestBody, UrlConstant.GCReservedUrl);
+        let requestObject = {
+            request: request,
+            success: object.success
+        }
+        MessageUtils.sendRequest(requestObject);
+    }
+
+    static sendBSWOtherShipReserved= (object) => {
+        let requestBody = ReservedManagerRequestBody.buildBSWOtherShipReserved(object.docLineRrn, object.materialLots, object.stockNote);
+        let requestHeader = new ReservedManagerRequestHeader();
+        let request = new Request(requestHeader, requestBody, UrlConstant.GCReservedUrl);
+        let requestObject = {
+            request: request,
+            success: object.success
+        }
+        MessageUtils.sendRequest(requestObject);
+    }
+
 
     static sendGetMaterialLotAndUserByRrnRequest = (object) => {
         let requestBody = ReservedManagerRequestBody.buildGetMaterialLotAndUser(object.tableRrn,object.whereClause);
